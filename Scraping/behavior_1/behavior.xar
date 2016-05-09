@@ -20,15 +20,15 @@
                             <bitmap>media/images/box/box-python-script.png</bitmap>
                             <script language="4">
                                 <content>
-                                    <![CDATA[import os
-import sqlite3
-import qi
-
+                                    <![CDATA[
 class MyClass(GeneratedClass):
     def __init__(self):
         GeneratedClass.__init__(self)
 
     def onLoad(self):
+        import os
+        import sqlite3
+        import qi
         self.frameManager = ALProxy("ALFrameManager")
         dbFile = "pepperSpeech.sqlite"
         self.db = os.path.join(self.frameManager.getBehaviorPath(self.behaviorId), "../db/" + dbFile)
