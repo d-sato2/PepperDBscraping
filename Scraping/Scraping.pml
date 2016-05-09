@@ -23,5 +23,7 @@
         <File name="test_datetime" src="lib/DateTime/tests/test_datetime.pyc" />
     </Resources>
     <Topics />
-    <IgnoredPaths />
+    <IgnoredPaths>
+        <Path src=".metadata" />
+    </IgnoredPaths>
 </Package>
