@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<package version="0.0.0" uuid="scraping-0f58bb">
+<package uuid="scraping-0f58bb" version="0.0.0">
  <names>
   <name lang="en_US">Scraping</name>
  </names>
