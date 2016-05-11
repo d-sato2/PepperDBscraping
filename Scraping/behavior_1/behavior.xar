@@ -499,7 +499,7 @@ class MyClass(GeneratedClass):
                                 </BehaviorLayer>
                             </Timeline>
                         </Box>
-                        <Box name="Set Lang" id="7" localization="8" tooltip="こちらに概要を記入" x="451" y="235">
+                        <Box name="Set Lang" id="7" localization="8" tooltip="こちらに概要を記入" x="452" y="210">
                             <bitmap>media/images/box/box-diagram.png</bitmap>
                             <script language="4">
                                 <content>
@@ -741,7 +741,8 @@ class MyClass(GeneratedClass):
                                                 <bitmap>media/images/box/box-python-script.png</bitmap>
                                                 <script language="4">
                                                     <content>
-                                                        <![CDATA[class MyClass(GeneratedClass):
+                                                        <![CDATA[import json
+class MyClass(GeneratedClass):
     def __init__(self):
         GeneratedClass.__init__(self)
 
@@ -774,7 +775,8 @@ class MyClass(GeneratedClass):
                                                 <bitmap>media/images/box/box-python-script.png</bitmap>
                                                 <script language="4">
                                                     <content>
-                                                        <![CDATA[class MyClass(GeneratedClass):
+                                                        <![CDATA[import json
+class MyClass(GeneratedClass):
     def __init__(self):
         GeneratedClass.__init__(self)
 
