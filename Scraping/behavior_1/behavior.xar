@@ -16,54 +16,7 @@
             <BehaviorLayer name="behavior_layer1">
                 <BehaviorKeyframe name="keyframe1" index="1">
                     <Diagram>
-                        <Box name="outputDB" id="18" localization="8" tooltip="" x="500" y="23">
-                            <bitmap>media/images/box/box-python-script.png</bitmap>
-                            <script language="4">
-                                <content>
-                                    <![CDATA[
-class MyClass(GeneratedClass):
-    def __init__(self):
-        GeneratedClass.__init__(self)
-
-    def onLoad(self):
-        import os
-        import sqlite3
-        import qi
-        self.frameManager = ALProxy("ALFrameManager")
-        dbFile = "pepperSpeech.sqlite"
-        self.db = os.path.join(self.frameManager.getBehaviorPath(self.behaviorId), "../db/" + dbFile)
-        self.ids = []
-        pass
-
-    def onUnload(self):
-        pass
-
-    def onInput_onStop(self):
-        self.onUnload() #it is recommended to reuse the clean-up as the box is stopped
-        self.onStopped() #activate the output of the box
-
-    def onInput_onStart(self,p):
-        QRData = p
-        with sqlite3.connect(self.db) as conn:
-            a = conn.execute("select qrdata, name from person where qrdata = '" + QRData + "'")
-            row = a.fetchone()
-            self.log(row)
-            self.log(row[0].encode('utf-8'))
-            self.log(row[1].encode('utf-8'))
-            DBdata = []
-            DBdata = [row[0].encode('utf-8'), row[1].encode('utf-8')]
-            self.log(DBdata)
-            self.onStopped(DBdata)
-            conn.close
-        pass]]>
-</content>
-                            </script>
-                            <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
-                            <Input name="onStart" type="0" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
-                            <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
-                            <Output name="onStopped" type="0" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
-                        </Box>
-                        <Box name="QRreader" id="19" localization="8" tooltip="" x="157" y="198">
+                        <Box name="QRreader" id="19" localization="8" tooltip="" x="152" y="167">
                             <bitmap>media/images/box/box-python-script.png</bitmap>
                             <script language="4">
                                 <content>
@@ -96,7 +49,7 @@ class MyClass(GeneratedClass):
                             <Input name="recover" type="1" type_size="1" nature="1" inner="0" tooltip="" id="4" />
                             <Output name="onStopped" type="0" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="5" />
                         </Box>
-                        <Box name="Say" id="2" localization="8" tooltip="Say some text. Note that you must open the box to enter the text." x="135" y="59">
+                        <Box name="Say" id="2" localization="8" tooltip="Say some text. Note that you must open the box to enter the text." x="155" y="39">
                             <bitmap>media/images/box/interaction/say.png</bitmap>
                             <script language="4">
                                 <content>
@@ -305,7 +258,7 @@ class MyClass(GeneratedClass):
                             </Timeline>
                             <Resource name="Speech" type="Lock" timeout="0" />
                         </Box>
-                        <Box name="DBscraping" id="1" localization="8" tooltip="" x="298" y="216">
+                        <Box name="DBscraping" id="1" localization="8" tooltip="" x="293" y="185">
                             <bitmap>media/images/box/box-python-script.png</bitmap>
                             <script language="4">
                                 <content>
@@ -356,7 +309,7 @@ class MyClass(GeneratedClass):
                             <Output name="english" type="0" type_size="1" nature="2" inner="0" tooltip="" id="7" />
                             <Output name="qrrecover" type="1" type_size="1" nature="2" inner="0" tooltip="" id="8" />
                         </Box>
-                        <Box name="AddModule" id="9" localization="8" tooltip="" x="368" y="18">
+                        <Box name="AddModule" id="9" localization="8" tooltip="" x="400" y="20">
                             <bitmap>media/images/box/box-python-script.png</bitmap>
                             <script language="4">
                                 <content>
@@ -384,7 +337,7 @@ class MyClass(GeneratedClass):
                             <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
                             <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="4" />
                         </Box>
-                        <Box name="pose" id="6" localization="8" tooltip="こちらに概要を記入" x="249" y="90">
+                        <Box name="pose" id="6" localization="8" tooltip="こちらに概要を記入" x="269" y="70">
                             <bitmap>media/images/box/box-diagram.png</bitmap>
                             <script language="4">
                                 <content>
@@ -509,7 +462,7 @@ class MyClass(GeneratedClass):
                                 </BehaviorLayer>
                             </Timeline>
                         </Box>
-                        <Box name="Set Lang" id="7" localization="8" tooltip="こちらに概要を記入" x="496" y="191">
+                        <Box name="Set Lang" id="7" localization="8" tooltip="こちらに概要を記入" x="437" y="159">
                             <bitmap>media/images/box/box-diagram.png</bitmap>
                             <script language="4">
                                 <content>
@@ -766,14 +719,14 @@ class MyClass(GeneratedClass):
 
     def onInput_onStart(self, p):
         p = json.loads(p)
-        content = "^start(animations/Stand/BodyTalk/Listening/Listening_1)　\RSPD=70\你看，， ^wait(animations/Stand/BodyTalk/Listening/Listening_1)\n"
-        content += "^start(animations/Stand/BodyTalk/Thinking/Remember_1)　\RSPD=80, vct=120\哦\VCT=180\哦ーーーーーー！ ^wait(animations/Stand/BodyTalk/Thinking/Remember_1)\n"
-        content += "^start(animations/Stand/BodyTalk/Thinking/Remember_2)　你是" + p["name"].encode('utf-8') + "，谁从" + p["place"].encode('utf-8') + "来的？ ^wait(animations/Stand/BodyTalk/Thinking/Remember_2)\n"
-        content += "^start(animations/Stand/Emotions/Positive/Excited_1)　感谢您来到小樽运河广场、 ^wait(animations/Stand/Emotions/Positive/Excited_1)\n"
-        content += "^start(animations/Stand/Emotions/Positive/Happy_3)　有一个从我的礼物，谢谢？ ^wait(animations/Stand/Emotions/Positive/Happy_3)\n"
-        content += "^start(animations/Stand/Gestures/WhatSThis_1)　非常著名的马龙结肠小樽？ ^wait(animations/Stand/Gestures/WhatSThis_1)\n"
-        content += "^start(animations/Stand/Emotions/Hysterical_1)　我真的希望你我回答问卷起来！ ^wait(animations/Stand/Emotions/Hysterical_1)\n"
-        content += "^start(animations/Stand/Gestures/Joy_1)　马龙结肠和调查问卷，请从工作人员谁是我的水平得到 ^wait(animations/Stand/Gestures/Joy_1) "
+        content = "^start(animations/Stand/BodyTalk/Listening/Listening_1)　\RSPD=70\你看，，\RSPD=80, vct=120\哦\pau=500\ ^wait(animations/Stand/BodyTalk/Listening/Listening_1)\n"
+        content += "^start(animations/Stand/BodyTalk/Thinking/Remember_1)　\VCT=180\哦ーーーーーー！\pau=500\ ^wait(animations/Stand/BodyTalk/Thinking/Remember_1)\n"
+        content += "^start(animations/Stand/BodyTalk/Thinking/Remember_2)　你是" + p["name"].encode('utf-8') + "，谁从" + p["place"].encode('utf-8') + "来的？\pau=500\ ^wait(animations/Stand/BodyTalk/Thinking/Remember_2)\n"
+        content += "^start(animations/Stand/Emotions/Positive/Excited_1)　感谢您来到小樽运河广场、\pau=500\ ^wait(animations/Stand/Emotions/Positive/Excited_1)\n"
+        content += "^start(animations/Stand/Emotions/Positive/Happy_4)　有一个从我的礼物，谢谢？\pau=500\ ^wait(animations/Stand/Emotions/Positive/Happy_4)\n"
+        content += "^start(animations/Stand/Gestures/WhatSThis_1)　非常著名的马龙结肠小樽？\pau=500\ ^wait(animations/Stand/Gestures/WhatSThis_1)\n"
+        content += "^start(animations/Stand/Emotions/Hysterical_1)　我真的希望你我回答问卷起来！\pau=500\ ^wait(animations/Stand/Emotions/Hysterical_1)\n"
+        content += "^start(animations/Stand/Gestures/Joy_1)　马龙结肠和调查问卷，请从工作人员谁是我的水平得到\pau=500\ ^wait(animations/Stand/Gestures/Joy_1) "
         self.onStopped(content)
         #self.onStopped(p) #activate the output of the box
         pass
@@ -807,14 +760,14 @@ class MyClass(GeneratedClass):
 
     def onInput_onStart(self, p):
         p = json.loads(p)
-        content = "^start(animations/Stand/BodyTalk/Listening/Listening_1)　\RSPD=70\hmmm, uh-huh,\pau=200\ ^wait(animations/Stand/BodyTalk/Listening/Listening_1)\n"
-        content += "^start(animations/Stand/BodyTalk/Thinking/Remember_1)　\RSPD=80, vct=120\Oh\VCT=180\wow\VCT=140, pau=200\ ^wait(animations/Stand/BodyTalk/Thinking/Remember_1)\n"
-        content += "^start(animations/Stand/BodyTalk/Thinking/Remember_2)　You're " + p["name"].encode('utf-8') + " , who came from " + p["place"].encode('utf-8') + ", right? \pau=100\ ^wait(animations/Stand/BodyTalk/Thinking/Remember_2)\n"
-        content += "^start(animations/Stand/Emotions/Positive/Excited_1) Thank you for coming to Otaru Canal Plaza,\pau=200\ ^wait(animations/Stand/Emotions/Positive/Excited_1)\n"
-        content += "^start(animations/Stand/Emotions/Positive/Happy_3) There is a gift from me to thank you?\pau=200\ ^wait(animations/Stand/Emotions/Positive/Happy_3)\n"
-        content += "^start(animations/Stand/Gestures/WhatSThis_1)Very famous Marron colon in Otaru!,\pau=200\  ^wait(animations/Stand/Gestures/WhatSThis_1)\n"
-        content += "^start(animations/Stand/Emotions/Hysterical_1)　I really hope you  answer the questionnaire survay together!\pau=200\ ^wait(animations/Stand/Emotions/Hysterical_1)\n"
-        content += "^start(animations/Stand/Gestures/Joy_1)　Marron colon and the questionnaire, please get from the staff who are in my horizontal\pau=200\ ^wait(animations/Stand/Gestures/Joy_1) "
+        content = "^start(animations/Stand/BodyTalk/Listening/Listening_1)　\RSPD=70\hmmm, uh-huh,\RSPD=80, vct=120\Oh\pau=500\ ^wait(animations/Stand/BodyTalk/Listening/Listening_1)\n"
+        content += "^start(animations/Stand/BodyTalk/Thinking/Remember_1)　\VCT=180\wow\VCT=140, pau=500\ ^wait(animations/Stand/BodyTalk/Thinking/Remember_1)\n"
+        content += "^start(animations/Stand/BodyTalk/Thinking/Remember_2)　You are " + p["name"].encode('utf-8') + " , who came from " + p["place"].encode('utf-8') + ", right? \pau=100\ ^wait(animations/Stand/BodyTalk/Thinking/Remember_2)\n"
+        content += "^start(animations/Stand/Emotions/Positive/Excited_1) Thank you for coming to Otaru Canal Plaza,\pau=500\ ^wait(animations/Stand/Emotions/Positive/Excited_1)\n"
+        content += "^start(animations/Stand/Emotions/Positive/Happy_4) There is a gift from me to thank you?\pau=500\ ^wait(animations/Stand/Emotions/Positive/Happy_4)\n"
+        content += "^start(animations/Stand/Gestures/WhatSThis_1)Very famous Marron colon in Otaru!,\pau=500\  ^wait(animations/Stand/Gestures/WhatSThis_1)\n"
+        content += "^start(animations/Stand/Emotions/Hysterical_1)　 Together, I really hope you  answer the questionnaire survay!\pau=800\ ^wait(animations/Stand/Emotions/Hysterical_1)\n"
+        content += "^start(animations/Stand/Gestures/Joy_1)　Please receive Marron colon and the questionnaire, from the staff standing next to me ^wait(animations/Stand/Gestures/Joy_1) "
         self.onStopped(content)
         #self.onStopped(p) #activate the output of the box
         pass
@@ -852,9 +805,9 @@ class MyClass(GeneratedClass):
         content += "^start(animations/Stand/BodyTalk/Thinking/Remember_1)　\\RSPD=100, vct=120\\あ\\VCT=180\\あーーーーーー！ ^wait(animations/Stand/BodyTalk/Thinking/Remember_1)\n"
         content += "^start(animations/Stand/BodyTalk/Thinking/Remember_2)　" + p["place"].encode('utf-8') + "から来た、" + p["name"].encode('utf-8') + "さん、ですねえええ？ ^wait(animations/Stand/BodyTalk/Thinking/Remember_2)\n"
         content += "^start(animations/Stand/Emotions/Positive/Excited_1)　運河プラザまで、来てくれて、ありがとうおおお？、 ^wait(animations/Stand/Emotions/Positive/Excited_1)\n"
-        content += "^start(animations/Stand/Emotions/Positive/Happy_3)　お礼に、僕からのプレゼントがあるよーーー？ ^wait(animations/Stand/Emotions/Positive/Happy_3)\n"
+        content += "^start(animations/Stand/Emotions/Positive/Happy_4)　お礼に、僕からのプレゼントがあるよーーー？ ^wait(animations/Stand/Emotions/Positive/Happy_4)\n"
         content += "^start(animations/Stand/Gestures/WhatSThis_1)　小樽ではとても有名な、\\RSPD=70, vct=220\\マロンコロン、\\RSPD=100, vct=180\\だよ？、 ^wait(animations/Stand/Gestures/WhatSThis_1)\n"
-        content += "^start(animations/Stand/Emotions/Hysterical_1)　一緒に、アンケートにも答えてくれたら、すごく嬉しいなあああ！ ^wait(animations/Stand/Emotions/Hysterical_1)\n"
+        content += "^start(animations/Stand/Emotions/Hysterical_1)　マロンコロンと一緒に、アンケートにも答えてくれたら、すごく嬉しいなあああ！ ^wait(animations/Stand/Emotions/Hysterical_1)\n"
         content += "^start(animations/Stand/Gestures/Joy_1)　マロンコロンと、アンケート用紙、については僕の横にいる、スタッフからもらってね？ ^wait(animations/Stand/Gestures/Joy_1) "
         self.onStopped(content)
 
@@ -868,7 +821,7 @@ class MyClass(GeneratedClass):
                                                 <Input name="onStop" type="1" type_size="1" nature="3" inner="0" tooltip="Box behavior stops when a signal is received on this input." id="3" />
                                                 <Output name="onStopped" type="0" type_size="1" nature="1" inner="0" tooltip="ボックスBehaviorの終了時に信号を送る。" id="4" />
                                             </Box>
-                                            <Box name="Set Language" id="7" localization="8" tooltip="Select the language you would like the robot to speak and understand. Any following call to&#x0A;ALSpeechRecognition (Speech Reco. box for instance) or ALTextToSpeech (Say box&#x0A;for instance) will use this language." x="457" y="117">
+                                            <Box name="Set Language" id="7" localization="8" tooltip="Select the language you would like the robot to speak and understand. Any following call to&#x0A;ALSpeechRecognition (Speech Reco. box for instance) or ALTextToSpeech (Say box&#x0A;for instance) will use this language." x="461" y="121">
                                                 <bitmap>media/images/box/interaction/say.png</bitmap>
                                                 <script language="4">
                                                     <content>
