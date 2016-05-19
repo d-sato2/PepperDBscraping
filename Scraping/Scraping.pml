@@ -2,7 +2,7 @@
 <Package name="Scraping" format_version="4">
     <Manifest src="manifest.xml" />
     <BehaviorDescriptions>
-        <BehaviorDescription name="behavior" src="behavior_1" xar="behavior.xar" />
+        <BehaviorDescription name="behavior" src="." xar="behavior.xar" />
     </BehaviorDescriptions>
     <Dialogs />
     <Resources>
@@ -21,6 +21,7 @@
         <File name="julian_testdata" src="lib/DateTime/tests/julian_testdata.txt" />
         <File name="test_datetime" src="lib/DateTime/tests/test_datetime.py" />
         <File name="test_datetime" src="lib/DateTime/tests/test_datetime.pyc" />
+        <File name="reading" src="html/reading.png" />
     </Resources>
     <Topics />
     <IgnoredPaths>
